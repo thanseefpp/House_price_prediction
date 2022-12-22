@@ -4,5 +4,6 @@ scikit-learn
 Flask
 matplotlib
 pickle
+gunicorn
 # xgboost
 # jupyter

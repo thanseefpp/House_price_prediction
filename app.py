@@ -1,9 +1,9 @@
 # Importing Libraries and Packages
-from flask import Flask, render_template, jsonify, request, url_for
+from flask import Flask, render_template, jsonify, request
 import pickle
 import numpy as np
-import pandas as pd
-import json
+# import pandas as pd
+# import json
 
 app = Flask(__name__)
 
@@ -49,8 +49,7 @@ def predict_data():
         data = [CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT]
         standardized_data = standardization.transform(np.array(data).reshape(1, -1))
         predicted_result = regression_model.predict(standardized_data)
-        # return render_template('index.html', predicted_score="The House Price Predicted {}".format(predicted_result))
-        return jsonify({'predicted_score':"Predicted Price : {}".format(round(predicted_result[0]))})
+        return jsonify({'predicted_score':"Predicted Price : {}".format(round(predicted_result[0],2))})
     return render_template('index.html')
 
 
