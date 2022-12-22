@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}"> -->
+  <!-- <link rel="stylesheet" href="style/style.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="{{ url_for('static', filename = '/styles/style.css') }}" rel="stylesheet">
+  <!-- Sweetalert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>House Price Predict</title>
+</head>
+
+<body>
+  <form id="form_id" method="POST">
+    <div class="mahi_holder">
+      <div class="container">
+        <div class="row bg_3">
+          <h3><i>House Price Predict</i></h3>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="CRIM" placeholder="" id="CRIM" required="required">
+            <label>CRIM</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="ZN" placeholder="" id="ZN" required="required">
+            <label>ZN</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="INDUS" placeholder="" id="INDUS" required="required">
+            <label>INDUS</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="CHAS" placeholder="" id="CHAS" required="required">
+            <label>CHAS</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="NOX" placeholder="" id="NOX" required="required">
+            <label>NOX</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="RM" placeholder="" id="RM" required="required">
+            <label>RM</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="AGE" placeholder="" id="AGE" required="required">
+            <label>AGE</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="DIS" placeholder="" id="DIS" required="required">
+            <label>DIS</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="RAD" placeholder="" id="RAD" required="required">
+            <label>RAD</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="TAX" placeholder="" id="TAX" required="required">
+            <label>TAX</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="PTRATIO" placeholder="" id="PTRATIO" required="required">
+            <label>PTRATIO</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" name="B" placeholder="" id="B" required="required">
+            <label>B</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-4 input-effect">
+            <input class="effect-20" type="text" name="LSTAT" placeholder="" id="LSTAT" required="required">
+            <label>LSTAT</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div class="col-4 input-effect">
+            <input id="btn" type="submit">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script>
+    $(document).on('submit', '#form_id', function (e) {
+          $.ajax({
+              type: 'POST',
+              url: '/predict',
+              data: {
+                  CRIM: $('#CRIM').val(),
+                  ZN: $('#ZN').val(),
+                  INDUS: $('#INDUS').val(),
+                  CHAS: $('#CHAS').val(),
+                  NOX: $('#NOX').val(),
+                  RM: $('#RM').val(),
+                  AGE: $('#AGE').val(),
+                  DIS: $('#DIS').val(),
+                  RAD: $('#RAD').val(),
+                  TAX: $('#TAX').val(),
+                  PTRATIO: $('#PTRATIO').val(),
+                  B: $('#B').val(),
+                  LSTAT: $('#LSTAT').val(),
+              }
+            })
+            .done(function(data){
+              item = data.predicted_score
+              Swal.fire(item)
+            });
+            e.preventDefault();
+      });
+  </script>
+</body>
+
+</html>
